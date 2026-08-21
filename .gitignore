@@ -1,0 +1,37 @@
+# Personal Obsidian UI state.
+# These record which panes you have open, so they change every time you
+# click around. Sharing them causes pointless merge conflicts.
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Obsidian's trash and backup caches
+.trash/
+.obsidian/plugins/*/data.json.bak
+
+# Claudian conversation history is local runtime state and may contain
+# sensitive prompts, paths, or generated content.
+.claudian/sessions/
+
+# Operating system junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# NOTE: we deliberately do NOT block large files here.
+# If git silently ignored your spreadsheet you would never know why it
+# failed to sync. Keeping big files out of this repo is a rule people
+# follow, not a filter - see "Where things belong" in README.md.
+
+# IMPORTANT - MOBILE USERS ONLY
+# On phones and tablets the Git plugin cannot use SSH, so it stores your
+# GitHub access token in the file below. If anyone sets that up,
+# uncomment this line immediately so the token is never committed.
+# .obsidian/plugins/obsidian-git/data.json
+
+# Local credentials and key material
+.env
+.env.*
+!.env.example
+*.pem
+*.key
