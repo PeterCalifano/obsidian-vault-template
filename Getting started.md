@@ -9,6 +9,8 @@ Use this checklist when creating a new vault from the template.
 - [ ] Open [[Open actions]] and confirm the Tasks plugin is working.
 - [ ] Test a Git pull and commit-and-sync before adding important content.
 - [ ] Configure any optional plugin accounts or command-line tools locally.
+- [ ] Optionally run `scripts/install-optional-plugins.sh --list` and install
+      only the plugins this vault needs.
 - [ ] Check that no credentials or private material are tracked.
 
 ## First note

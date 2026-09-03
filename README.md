@@ -13,6 +13,8 @@ can be versioned, shared, and edited outside Obsidian.
 - Git synchronization configured for periodic pull, commit, and push.
 - Community plugins for Git, Tasks, Excalidraw, Terminal, and optional Claudian
   AI assistance.
+- An opt-in installer for the complete community-plugin set used by the Food
+  Waste Project vault.
 
 ## Get started
 
@@ -97,7 +99,7 @@ credential manager.
 
 ## Optional plugins
 
-The repository bundles these community plugins:
+The template starts with these five plugins enabled:
 
 - **Git** for version control and synchronization.
 - **Tasks** for live task queries.
@@ -108,6 +110,50 @@ The repository bundles these community plugins:
 Claudian is desktop-only and requires a supported command-line provider to be
 installed and configured locally. Review plugin permissions before using it on
 a shared or sensitive vault.
+
+The repository also carries the exact plugin payloads used by the project vault
+for optional installation. The available additional plugins are Image
+Converter, Importer, Latex Suite, Linter, Pandoc Plugin, Zotero Integration,
+Recent Files, Smart Connections, Advanced Tables, Tag Wrangler, and Templater.
+Pandoc, Zotero Integration, and Claudian are desktop-only; Pandoc and Zotero
+also require their corresponding local applications or command-line tools.
+
+| Plugin | ID | Bundled version |
+| --- | --- | --- |
+| Image Converter | `image-converter` | 1.4.6 |
+| Importer | `obsidian-importer` | 3.0.0 |
+| Latex Suite | `obsidian-latex-suite` | 1.12.8 |
+| Linter | `obsidian-linter` | 1.32.0 |
+| Pandoc Plugin | `obsidian-pandoc` | 0.4.1 |
+| Zotero Integration | `obsidian-zotero-desktop-connector` | 3.2.1 |
+| Recent Files | `recent-files-obsidian` | 1.7.10 |
+| Smart Connections | `smart-connections` | 4.7.2 |
+| Advanced Tables | `table-editor-obsidian` | 0.23.2 |
+| Tag Wrangler | `tag-wrangler` | 0.6.5 |
+| Templater | `templater-obsidian` | 2.25.0 |
+
+The installer is never run automatically. List the available plugins first:
+
+```bash
+./scripts/install-optional-plugins.sh --list
+```
+
+Install selected plugins into this template:
+
+```bash
+./scripts/install-optional-plugins.sh image-converter table-editor-obsidian
+```
+
+Install every available plugin into another vault derived from this template:
+
+```bash
+./scripts/install-optional-plugins.sh --all --target /path/to/vault
+```
+
+Use `--dry-run` to inspect the changes without writing files. The installer
+requires Python 3 to validate and update `community-plugins.json`. Existing
+plugin `data.json` settings in the target vault are preserved; bundled settings
+are used when a plugin is installed into a fresh target.
 
 ## Rules of thumb
 
