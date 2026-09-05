@@ -35,3 +35,13 @@ desktop.ini
 !.env.example
 *.pem
 *.key
+
+# ---- Device-local Obsidian state: never sync (see repo sync policy) ----
+.obsidian/appearance.json
+.obsidian/graph.json
+.obsidian/hotkeys.json
+.obsidian/plugins/recent-files-obsidian/data.json
+.obsidian/plugins/smart-connections/data.json
+.obsidian/plugins/terminal/data.json
+.smart-env/
+conflict-files-obsidian-git.md
