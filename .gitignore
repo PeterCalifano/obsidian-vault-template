@@ -1,18 +1,58 @@
-# Personal Obsidian UI state.
+# What stays out of a vault's Git history.
+#
+# Rule of thumb: if a file is written by Obsidian or a plugin as you use it,
+# it is local state and does not belong here. It differs per machine, changes
+# constantly, and causes merge conflicts that stall the Git plugin's sync.
+
+# ---- Obsidian UI state ----
 # These record which panes you have open, so they change every time you
 # click around. Sharing them causes pointless merge conflicts.
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 
-# Obsidian's trash and backup caches
-.trash/
+# ---- Per-device preferences ----
+.obsidian/appearance.json
+.obsidian/graph.json
+.obsidian/hotkeys.json
+
+# ---- Plugin settings: deny by default ----
+# Plugins fill these in as you use them, and they may hold API keys (Excalidraw
+# has slots for OpenAI, Anthropic, Gemini and xAI) or absolute local paths
+# (Pandoc's binary, Zotero's database). List an exception only for settings the
+# team genuinely shares.
+.obsidian/plugins/*/data.json
 .obsidian/plugins/*/data.json.bak
+.obsidian/plugins/obsidian-git/obsidian_askpass.sh
 
-# Claudian conversation history is local runtime state and may contain
-# sensitive prompts, paths, or generated content.
+# The Git plugin's own settings ARE shared: this is how the sync configuration
+# (pull on boot, pull before push, commit interval) reaches every machine.
+!.obsidian/plugins/obsidian-git/data.json
+#
+# IMPORTANT - MOBILE USERS ONLY
+# On phones and tablets the Git plugin cannot use SSH, so it stores your
+# GitHub access token in that same file. If anyone sets that up, DELETE the
+# exception line directly above immediately, so the token is never committed.
+# You lose shared sync settings; that is the correct trade.
+
+# ---- Local caches and generated artifacts ----
+.smart-env/
+.trash/
+conflict-files-obsidian-git.md
+
+# ---- AI assistant local state ----
+# Session history may contain sensitive prompts; settings are personal
+# (model, effort level, permission mode) and must not be pushed onto teammates.
 .claudian/sessions/
+.claudian/claudian-settings.json
 
-# Operating system junk
+# ---- Local credentials and key material ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---- Operating system junk ----
 .DS_Store
 Thumbs.db
 desktop.ini
@@ -22,26 +62,3 @@ desktop.ini
 # If git silently ignored your spreadsheet you would never know why it
 # failed to sync. Keeping big files out of this repo is a rule people
 # follow, not a filter - see "Where things belong" in README.md.
-
-# IMPORTANT - MOBILE USERS ONLY
-# On phones and tablets the Git plugin cannot use SSH, so it stores your
-# GitHub access token in the file below. If anyone sets that up,
-# uncomment this line immediately so the token is never committed.
-# .obsidian/plugins/obsidian-git/data.json
-
-# Local credentials and key material
-.env
-.env.*
-!.env.example
-*.pem
-*.key
-
-# ---- Device-local Obsidian state: never sync (see repo sync policy) ----
-.obsidian/appearance.json
-.obsidian/graph.json
-.obsidian/hotkeys.json
-.obsidian/plugins/recent-files-obsidian/data.json
-.obsidian/plugins/smart-connections/data.json
-.obsidian/plugins/terminal/data.json
-.smart-env/
-conflict-files-obsidian-git.md
